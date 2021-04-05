@@ -9,7 +9,7 @@ when working with digital signal processing in golang.
 - Read signal files
 - Sample signal files
 - Normalize signals
-- Calculate the frequency spectrum (FFT and some number crunching)
+- Calculate the frequency spectrum (FFT + some spectrum logic)
 - Low and high pass filtering on a signal
 
 #### The heart beat package
@@ -30,7 +30,7 @@ The heart beat package is a package that can be used to detect heart beats (time
 
 ## Details and background
 
-There is a code walk through with a lot of examples at medium...
+There is a code walk through with a lot of examples at medium <to add>.
 
 Example signal from http://www.paulvangent.com/
 
@@ -39,6 +39,8 @@ Example signal from http://www.paulvangent.com/
 ```$ go get github.com/eripe970/go-dsp-utils```
 
 ### Example
+
+Example program for working with signals (see examples/basic).
 
 ```
 package main
@@ -66,7 +68,7 @@ func main() {
 	// Normalize the signal between -1 and 1
 	normalized, _ := signal1.Normalize()
 	
-	// Calculate the frequency spectrum of the signal (FFT + massage of the numbers)
+	// Calculate the frequency spectrum of the signal
 	spectrum, _ := normalized.FrequencySpectrum()
 
 	fmt.Println(spectrum)
@@ -88,6 +90,8 @@ Length: 788, Spectrum: 0Hz - 15.5Hz
 ```
 
 ### R-peak example
+
+Example program for detecting heart rate (r-peaks).
 
 ```
 package main
