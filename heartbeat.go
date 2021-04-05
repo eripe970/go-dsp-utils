@@ -28,7 +28,11 @@ func GetRPeaks(signal *Signal) RPeaks {
 
 		t := currentTime - previousTime
 		rPeakInterval = append(rPeakInterval, t)
-		bpm = append(bpm, 60/t)
+		if t == 0 {
+			bpm = append(bpm, 0)
+		} else{
+			bpm = append(bpm, 60/t)
+		}
 
 		previousTime = currentTime
 	}

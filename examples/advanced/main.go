@@ -60,9 +60,15 @@ func handler(w http.ResponseWriter, _ *http.Request) {
 
 	// 5. Filter the signal
 	// 0.5Hz => 30 BPM
-	// 1Hz => 60 BPM
+	// 1.2Hz => 70 BPM
 	// In our example we only care about resting heart rates zones
-	signalFiltered, err := signalNormalized.BandPassFilter(0.5, 1)
+	signalFiltered, err := signalNormalized.BandPassFilter(0.5, 1.2)
+
+	if err != nil {
+		panic(err)
+	}
+
+	signalFiltered, err = signalFiltered.Normalize()
 
 	if err != nil {
 		panic(err)

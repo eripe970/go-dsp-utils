@@ -83,18 +83,8 @@ func (s *Signal) Normalize() (*Signal, error) {
 		}, nil
 	}
 
-	min := input[0]
-	max := input[0]
-
-	for i := range input {
-		if input[i] < min {
-			min = input[i]
-		}
-
-		if input[i] > max {
-			max = input[i]
-		}
-	}
+	min := s.Min()
+	max := s.Max()
 
 	// We can't normalize a flat signal where min == max
 	if min == max {
