@@ -81,9 +81,9 @@ func main() {
 Output:
 
 ```
-SampleRate: 31, Length: 1577, Duration: 50.9s
-SampleRate: 100, Length: 2483, Duration: 24.8s
-SampleRate: 31, Length: 310, Duration: 10.0s
+SampleRate: 31Hz, Length: 1577, Duration: 50.9s
+SampleRate: 100Hz, Length: 2483, Duration: 24.8s
+SampleRate: 31Hz, Length: 310, Duration: 10.0s
 Length: 788, Spectrum: 0Hz - 15.5Hz
 ```
 

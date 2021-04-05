@@ -58,5 +58,5 @@ func (r *RPeaks) String() string {
 
 	avgHeartRate := int(sum / float64(len(r.HeartBeatsPerMinute)))
 
-	return fmt.Sprintf("Total heart beats detected: %v, avg heart rate: %v", len(r.HeartBeatsPerMinute), avgHeartRate)
+	return fmt.Sprintf("Total heart beats detected: %v, avg heart rate: %v BPM", len(r.HeartBeatsPerMinute), avgHeartRate)
 }
