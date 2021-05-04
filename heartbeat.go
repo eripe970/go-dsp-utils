@@ -30,7 +30,7 @@ func GetRPeaks(signal *Signal) RPeaks {
 		rPeakInterval = append(rPeakInterval, t)
 		if t == 0 {
 			bpm = append(bpm, 0)
-		} else{
+		} else {
 			bpm = append(bpm, 60/t)
 		}
 
@@ -54,13 +54,19 @@ func (r *RPeaks) IsRPeak(index int) bool {
 	return false
 }
 
-func (r *RPeaks) String() string {
+func (r *RPeaks) Avg() int {
 	sum := 0.0
 	for i := range r.HeartBeatsPerMinute {
 		sum += r.HeartBeatsPerMinute[i]
 	}
 
-	avgHeartRate := int(sum / float64(len(r.HeartBeatsPerMinute)))
+	return int(sum / float64(len(r.HeartBeatsPerMinute)))
+}
 
-	return fmt.Sprintf("Total heart beats detected: %v, avg heart rate: %v BPM", len(r.HeartBeatsPerMinute), avgHeartRate)
+func (r *RPeaks) Count() int {
+	return len(r.HeartBeatsPerMinute)
+}
+
+func (r *RPeaks) String() string {
+	return fmt.Sprintf("Total heart beats detected: %v, avg heart rate: %v BPM", r.Count(), r.Avg())
 }
