@@ -55,6 +55,10 @@ func (r *RPeaks) IsRPeak(index int) bool {
 }
 
 func (r *RPeaks) Avg() int {
+	if len(r.HeartBeatsPerMinute) == 0 {
+		return 0
+	}
+	
 	sum := 0.0
 	for i := range r.HeartBeatsPerMinute {
 		sum += r.HeartBeatsPerMinute[i]
