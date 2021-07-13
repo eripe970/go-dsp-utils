@@ -15,10 +15,13 @@ type FrequencySpectrum struct {
 }
 
 func (s *FrequencySpectrum) String() string {
-	return fmt.Sprintf("Length: %v, Spectrum: 0Hz - %.1fHz", len(s.Spectrum), s.Frequencies[len(s.Frequencies)-1])
+	if s.Spectrum != nil && s.Frequencies != nil {
+		return fmt.Sprintf("Length: %v, Spectrum: 0Hz - %.1fHz", len(s.Spectrum), s.Frequencies[len(s.Frequencies)-1])
+	}
+	return "No spectrum or frequencies"
 }
 
-// Calculate the frequency spectrum of the signal.
+// FrequencySpectrum calculates the frequency spectrum of the signal.
 func (s *Signal) FrequencySpectrum() (*FrequencySpectrum, error) {
 	// Apply the FFT on the signal to get the frequency components
 	fft := fft2.FFTReal(s.Signal)
