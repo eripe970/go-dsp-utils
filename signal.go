@@ -27,6 +27,35 @@ func (s *Signal) Sample(duration time.Duration) *Signal {
 	}
 }
 
+func (s *Signal) Split(split time.Duration) []*Signal {
+	sample := make([]float64, 0)
+
+	result := make([]*Signal, 0)
+
+	size := int(s.SampleRate * split.Seconds())
+
+	for i := 0; i < len(s.Signal); i++ {
+		sample = append(sample, s.Signal[i])
+
+		if i > 0 && i%size == 0 {
+			result = append(result, &Signal{
+				SampleRate: s.SampleRate,
+				Signal:     sample,
+			})
+			sample = make([]float64, 0)
+		}
+	}
+
+	if len(sample) > 0 {
+		result = append(result, &Signal{
+			SampleRate: s.SampleRate,
+			Signal:     sample,
+		})
+	}
+
+	return result
+}
+
 func (s *Signal) String() string {
 	return fmt.Sprintf("SampleRate: %vHz, Length: %v, Duration: %.1fs", s.SampleRate, len(s.Signal), s.Duration())
 }
