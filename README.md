@@ -30,7 +30,7 @@ The heart beat package is a package that can be used to detect heart beats (time
 
 ## Details and background
 
-There is a code walk through with a lot of examples at medium <to add>.
+There is a code walk through with a lot of examples at https://medium.com/dreamwod-tech/digital-signal-processing-with-golang-b7c1682c0b43.
 
 Example signal from http://www.paulvangent.com/
 
