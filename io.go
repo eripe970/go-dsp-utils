@@ -35,10 +35,10 @@ func ReadSignalFile(path string, sampleRate float64) (*Signal, error) {
 func ReadArray(dataArray []float64, sampleRate float64) (*Signal, error){
 	signal := Signal{
 		SampleRate: sampleRate,
-		Signal:     make([]float64, 0),
+		Signal:    dataArray,
 	}
 
-	for i:=0; i < len(dataArray); i++ {
+	for i:=0; i < len(signal.Signal); i++ {
 		v:=  dataArray[i]
 		signal.Signal = append(signal.Signal, v)
 	}
