@@ -5,8 +5,23 @@ import (
 	"github.com/mattetti/audio/transforms/filters"
 )
 
+// fakedFreq returns faked cutoff frequency and sample rate if the given
+// sample rate is less than 0.
+// it is a workaround for https://github.com/eripe970/go-dsp-utils/issues/4
+func fakedFreq(cutOffFreq, sampleRate float64) (float64, int) {
+	sr := int(sampleRate)
+	m := 1.0
+	for sr == 0 {
+		m = m * 1000
+		cutOffFreq = cutOffFreq * 1000
+		sr = int(sampleRate * m)
+	}
+	return cutOffFreq, sr
+}
+
 func (s *Signal) LowPassFilter(cutOffFreq float64) (*Signal, error) {
-	buffer := audio.NewPCMFloatBuffer(s.Signal, &audio.Format{SampleRate: int(s.SampleRate)})
+	cutOffFreq, sampleRate := fakedFreq(cutOffFreq, s.SampleRate)
+	buffer := audio.NewPCMFloatBuffer(s.Signal, &audio.Format{SampleRate: sampleRate})
 
 	err := filters.LowPass(buffer, cutOffFreq)
 
@@ -21,7 +36,8 @@ func (s *Signal) LowPassFilter(cutOffFreq float64) (*Signal, error) {
 }
 
 func (s *Signal) HighPassFilter(cutOffFreq float64) (*Signal, error) {
-	buffer := audio.NewPCMFloatBuffer(s.Signal, &audio.Format{SampleRate: int(s.SampleRate)})
+	cutOffFreq, sampleRate := fakedFreq(cutOffFreq, s.SampleRate)
+	buffer := audio.NewPCMFloatBuffer(s.Signal, &audio.Format{SampleRate: sampleRate})
 
 	err := filters.HighPass(buffer, cutOffFreq)
 
