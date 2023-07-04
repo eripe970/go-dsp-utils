@@ -31,3 +31,11 @@ func ReadSignalFile(path string, sampleRate float64) (*Signal, error) {
 	}
 	return &signal, scanner.Err()
 }
+
+// Function allows for reading arrays
+func ReadArray(signal []float64, sampleRate float64) *Signal {
+	return &Signal{
+		SampleRate: sampleRate,
+		Signal:     signal,
+	}
+}
